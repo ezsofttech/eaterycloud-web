@@ -316,7 +316,41 @@ export function LoginPortalView() {
                   </button>
 
                   {idx < ROLES.length - 1 && (
-                    <div className="w-6 sm:w-10 border-t border-dashed border-white/25" />
+                    <div className="relative w-7 sm:w-12 h-3.5 flex items-center justify-center select-none">
+                      {/* Animated Dashed Connector Line */}
+                      <svg className="w-full h-2 overflow-visible" viewBox="0 0 44 4">
+                        {/* Background track */}
+                        <line
+                          x1="0"
+                          y1="2"
+                          x2="44"
+                          y2="2"
+                          stroke="rgba(255, 255, 255, 0.15)"
+                          strokeWidth="2"
+                          strokeDasharray="4 3"
+                        />
+                        {/* Glowing flowing line */}
+                        <line
+                          x1="0"
+                          y1="2"
+                          x2="44"
+                          y2="2"
+                          stroke={idx < activeIndex ? "#FF710D" : idx === activeIndex ? "#FFA35B" : "rgba(255, 255, 255, 0.35)"}
+                          strokeWidth="2"
+                          strokeDasharray="4 3"
+                          strokeLinecap="round"
+                          className={idx <= activeIndex ? "animate-dash-flow" : "animate-dash-flow-slow"}
+                          style={{
+                            filter: idx <= activeIndex ? "drop-shadow(0 0 3px rgba(255, 113, 13, 0.8))" : undefined,
+                          }}
+                        />
+                      </svg>
+
+                      {/* Moving Energy Photon Pulse on Active Connector */}
+                      {idx === activeIndex && (
+                        <span className="absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#FF710D] shadow-[0_0_8px_#FF710D,0_0_2px_#FFF] animate-travel-dot pointer-events-none" />
+                      )}
+                    </div>
                   )}
                 </React.Fragment>
               );

@@ -248,3 +248,46 @@ body {
 .animate-text-reveal-delay-2 {
   animation: textRevealUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.16s both;
 }
+
+/* Connector Animated Dashes & Energy Pulse */
+@keyframes flowingDashesForward {
+  from {
+    stroke-dashoffset: 14;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-dash-flow {
+  animation: flowingDashesForward 0.75s linear infinite;
+}
+
+.animate-dash-flow-slow {
+  animation: flowingDashesForward 1.5s linear infinite;
+}
+
+@keyframes connectorEnergyDot {
+  0% {
+    left: 0%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+  80% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+}
+
+.animate-travel-dot {
+  animation: connectorEnergyDot 1.3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}

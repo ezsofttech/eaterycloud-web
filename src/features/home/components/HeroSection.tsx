@@ -17,31 +17,31 @@ export function HeroSection() {
   const [demoOpen, setDemoOpen] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
 
-  // Live calculation state for Order #1042 with clean Bootstrap Icons (No emoji/sticker)
+  // Live calculation state for Order POS-001552 with clean Bootstrap Icons (No emoji/sticker)
   const [items, setItems] = useState<OrderItem[]>([
     {
-      id: "pizza",
-      name: "Margherita Pizza",
-      price: 349,
+      id: "sandwich",
+      name: "Bombay Masala Sandwich",
+      price: 90,
       qty: 1,
-      icon: "bi-pie-chart-fill",
+      icon: "bi-layers-fill",
       iconBg: "bg-orange-50 text-[#FF710D] border-orange-200",
     },
     {
-      id: "salad",
-      name: "Caesar Salad",
-      price: 199,
+      id: "coffee",
+      name: "Cold Coffee Shake",
+      price: 60,
+      qty: 1,
+      icon: "bi-cup-straw",
+      iconBg: "bg-blue-50 text-blue-600 border-blue-200",
+    },
+    {
+      id: "fries",
+      name: "Peri Peri Fries",
+      price: 70,
       qty: 1,
       icon: "bi-basket2-fill",
       iconBg: "bg-emerald-50 text-emerald-600 border-emerald-200",
-    },
-    {
-      id: "cola",
-      name: "Chilled Cola",
-      price: 60,
-      qty: 2,
-      icon: "bi-cup-straw",
-      iconBg: "bg-blue-50 text-blue-600 border-blue-200",
     },
   ]);
 
@@ -55,14 +55,14 @@ export function HeroSection() {
 
         if (next === 0) {
           setItems([
-            { id: "pizza", name: "Margherita Pizza", price: 349, qty: 1, icon: "bi-pie-chart-fill", iconBg: "bg-orange-50 text-[#FF710D] border-orange-200" },
-            { id: "salad", name: "Caesar Salad", price: 199, qty: 1, icon: "bi-basket2-fill", iconBg: "bg-emerald-50 text-emerald-600 border-emerald-200" },
-            { id: "cola", name: "Chilled Cola", price: 60, qty: 1, icon: "bi-cup-straw", iconBg: "bg-blue-50 text-blue-600 border-blue-200" },
+            { id: "sandwich", name: "Bombay Masala Sandwich", price: 90, qty: 1, icon: "bi-layers-fill", iconBg: "bg-orange-50 text-[#FF710D] border-orange-200" },
+            { id: "coffee", name: "Cold Coffee Shake", price: 60, qty: 1, icon: "bi-cup-straw", iconBg: "bg-blue-50 text-blue-600 border-blue-200" },
+            { id: "fries", name: "Peri Peri Fries", price: 70, qty: 1, icon: "bi-basket2-fill", iconBg: "bg-emerald-50 text-emerald-600 border-emerald-200" },
           ]);
         } else if (next === 1) {
           setItems((curr) =>
             curr.map((item) =>
-              item.id === "cola" ? { ...item, qty: 2 } : item
+              item.id === "sandwich" ? { ...item, qty: 2 } : item
             )
           );
         }
@@ -331,10 +331,10 @@ export function HeroSection() {
                     <div className="flex items-center gap-1.5 min-w-0">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-300 shadow-[0_0_6px_#6ee7b7] animate-pulse shrink-0" />
                       <span className="text-[11px] font-black tracking-wider uppercase truncate">
-                        ORDER #1042
+                        POS-001552
                       </span>
                       <span className="text-[9px] font-mono opacity-80 ml-0.5">
-                        // T-04
+                        // TAKEOFF
                       </span>
                     </div>
                     <i className="bi bi-arrow-right text-xs"></i>

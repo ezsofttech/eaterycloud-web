@@ -80,6 +80,7 @@ export function TestimonialsSection() {
                   src={current.avatarSrc}
                   alt={current.author}
                   fill
+                  sizes="64px"
                   className="object-cover"
                 />
               </div>
