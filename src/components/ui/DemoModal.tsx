@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
+import Link from "next/link";
 
 interface DemoModalProps {
   isOpen: boolean;
@@ -71,14 +72,14 @@ export function DemoModal({ isOpen, onClose }: DemoModalProps) {
               See how orders flow seamlessly from the customer touchscreen POS to the back-of-house kitchen display in real time.
             </p>
             <div className="flex items-center justify-center gap-3">
-              <a
-                href="#portals"
+              <Link
+                href="/login"
                 onClick={onClose}
                 className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#FF710D] hover:bg-[#E65E00] text-white text-sm font-semibold shadow-md transition-colors"
               >
                 <span>Explore Portal Logins</span>
                 <i className="bi bi-arrow-right text-xs"></i>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
