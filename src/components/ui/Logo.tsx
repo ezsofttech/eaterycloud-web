@@ -17,12 +17,12 @@ export function Logo({
   href = "/",
 }: LogoProps) {
   const sizeMap = {
-    sm: { height: 28, width: 127, iconSize: 28 },
-    md: { height: 36, width: 164, iconSize: 36 },
-    lg: { height: 44, width: 200, iconSize: 44 },
+    sm: { classNames: "h-7 w-auto", iconSize: 28 },
+    md: { classNames: "h-9 w-auto", iconSize: 36 },
+    lg: { classNames: "h-11 w-auto", iconSize: 44 },
   };
 
-  const { height, width, iconSize } = sizeMap[size];
+  const { classNames, iconSize } = sizeMap[size];
   const logoSrc =
     variant === "light"
       ? "/images/eatery-logo-white.png"
@@ -33,11 +33,11 @@ export function Logo({
       {iconOnly ? (
         <div className="relative shrink-0 flex items-center justify-center">
           <Image
-            src="/images/logo_orange.png"
+            src="/icons/logo_orange.png"
             alt="Eatery Cloud Emblem"
             width={iconSize}
             height={iconSize}
-            className="object-contain"
+            className="w-auto h-auto object-contain"
             priority
           />
         </div>
@@ -45,10 +45,9 @@ export function Logo({
         <Image
           src={logoSrc}
           alt="Eatery Cloud Logo"
-          width={width}
-          height={height}
-          style={{ height: `${height}px`, width: "auto" }}
-          className="object-contain shrink-0"
+          width={814}
+          height={179}
+          className={`${classNames} object-contain shrink-0`}
           priority
         />
       )}

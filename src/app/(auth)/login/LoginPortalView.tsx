@@ -232,10 +232,9 @@ export function LoginPortalView() {
             <Image
               src="/images/eatery-logo.png"
               alt="Eatery Cloud"
-              width={127}
-              height={28}
-              style={{ height: "26px", width: "auto" }}
-              className="object-contain"
+              width={814}
+              height={179}
+              className="h-6 sm:h-7 w-auto object-contain"
               priority
             />
           </Link>
