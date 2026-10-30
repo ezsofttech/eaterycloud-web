@@ -189,7 +189,7 @@ export function LoginPortalView() {
       {/* LEFT: SLIDER HERO SIDE (FULL SCREEN COVER WITH CINEMATIC ZOOM) */}
       {/* ============================================================== */}
       <div
-        className="relative w-full lg:w-[48%] xl:w-[50%] h-[320px] sm:h-[360px] lg:h-full shrink-0 overflow-hidden flex flex-col justify-between p-6 sm:p-8 lg:p-10 xl:p-12 select-none bg-[#0B1726]"
+        className="relative w-full lg:w-[48%] xl:w-[50%] h-[320px] sm:h-[360px] lg:h-full shrink-0 overflow-hidden flex flex-col justify-between p-6 sm:p-8 lg:p-8 xl:p-10 select-none bg-[#0B1726]"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
@@ -222,29 +222,29 @@ export function LoginPortalView() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0B1726]/95 via-black/45 to-black/35 z-10 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0B1726]/60 via-transparent to-black/35 z-10 pointer-events-none" />
 
-        {/* Top Header: Logo & Role Status Badge */}
-        <div className="relative z-20 flex items-center justify-between gap-3">
+        {/* Top Header: Logo & Role Status Badge (Aligned horizontally with right panel) */}
+        <div className="relative z-20 h-11 flex items-center justify-between gap-3">
           <Link
             href="/"
             title="Eatery Cloud Home"
-            className="group flex items-center px-3.5 py-2 bg-white/95 hover:bg-white rounded-2xl shadow-xl border border-white/40 backdrop-blur-md transition-all duration-200 hover:scale-105"
+            className="group h-11 flex items-center px-4 bg-white/95 hover:bg-white rounded-xl shadow-md border border-white/40 backdrop-blur-md transition-all duration-200 hover:scale-[1.02]"
           >
             <Image
               src="/images/eatery-logo.png"
               alt="Eatery Cloud"
               width={814}
               height={179}
-              className="h-6 sm:h-7 w-auto object-contain"
+              className="h-7 w-auto object-contain"
               priority
             />
           </Link>
 
-          {/* Role Status Badge (replaces Live System) */}
+          {/* Role Status Badge */}
           <div
             key={`badge-${activeRole.id}`}
-            className="flex items-center gap-3 px-3.5 py-2 rounded-2xl bg-black/50 backdrop-blur-xl border border-white/20 shadow-2xl text-white select-none transition-all duration-300"
+            className="h-11 flex items-center gap-3 px-3.5 rounded-xl bg-black/50 backdrop-blur-xl border border-white/20 shadow-md text-white select-none transition-all duration-300"
           >
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#FF710D]/25 border border-[#FF710D]/50 flex items-center justify-center text-[#FF710D] text-base sm:text-lg shadow-sm shrink-0">
+            <div className="w-7 h-7 rounded-lg bg-[#FF710D]/25 border border-[#FF710D]/50 flex items-center justify-center text-[#FF710D] text-sm shadow-sm shrink-0">
               <i className={`bi ${activeRole.badgeIcon}`} />
             </div>
             <div>
@@ -252,7 +252,7 @@ export function LoginPortalView() {
                 {activeRole.badgeTitle}
               </div>
               <div className="text-xs font-bold text-white flex items-center gap-1.5 mt-1 leading-none">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FF710D] animate-pulse shrink-0" />
                 <span>{activeRole.badgeSubtitle}</span>
               </div>
             </div>
@@ -362,35 +362,36 @@ export function LoginPortalView() {
       {/* ============================================================== */}
       {/* RIGHT: LOGIN SELECTION FORM (ONE SCREEN FIT, NO SCROLL)        */}
       {/* ============================================================== */}
-      <div className="flex-1 h-full flex flex-col justify-between px-6 sm:px-10 lg:px-12 xl:px-16 py-6 sm:py-8 lg:py-8 bg-[#FAF8F5] relative overflow-hidden">
+      <div className="flex-1 h-full flex flex-col justify-between px-6 sm:px-10 lg:px-12 xl:px-16 p-6 sm:p-8 lg:p-8 xl:p-10 bg-[#FAF8F5] relative overflow-hidden">
         {/* Subtle decorative ambient glow at top right */}
         <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-[#FF710D]/10 via-transparent to-transparent pointer-events-none rounded-bl-full blur-2xl" />
 
-        {/* Top Navigation: Breadcrumb path matching theme */}
-        <div className="shrink-0 flex items-center justify-between relative z-10">
+        {/* Top Navigation: Breadcrumb path & Security badge (Aligned at same level as Logo) */}
+        <div className="shrink-0 h-11 flex items-center justify-between relative z-10 gap-3">
           <nav aria-label="Breadcrumb">
-            <ol className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 py-1.5 rounded-xl bg-white/90 hover:bg-white border border-[#E7DFD5] hover:border-[#FF710D]/30 shadow-xs text-xs sm:text-sm font-medium transition-all duration-200">
+            <ol className="h-11 inline-flex items-center gap-1.5 sm:gap-2 px-3.5 rounded-xl bg-white/90 hover:bg-white border border-[#E7DFD5] hover:border-[#FF710D]/30 shadow-xs text-xs sm:text-sm font-medium transition-all duration-200">
               <li className="inline-flex items-center">
                 <Link
                   href="/"
                   title="Back to Home"
-                  className="text-neutral-600 hover:text-[#FF710D] transition-colors"
+                  className="text-neutral-600 hover:text-[#FF710D] transition-colors flex items-center gap-1.5"
                 >
-                  Home
+                  <i className="bi bi-house-door text-xs text-neutral-400" />
+                  <span>Home</span>
                 </Link>
               </li>
               <li className="text-neutral-300 select-none flex items-center" aria-hidden="true">
                 <i className="bi bi-chevron-right text-[10px]" />
               </li>
-              <li className="inline-flex items-center text-[#FF710D] font-semibold" aria-current="page">
+              <li className="inline-flex items-center text-[#FF710D] font-bold" aria-current="page">
                 Login
               </li>
             </ol>
           </nav>
 
-          <div className="flex items-center gap-1.5 text-xs font-medium text-neutral-400">
-            <i className="bi bi-shield-check text-emerald-600" />
-            <span className="hidden sm:inline">256-Bit SSL Encrypted</span>
+          <div className="h-11 inline-flex items-center gap-2 px-3.5 rounded-xl bg-white/90 border border-[#E7DFD5] text-xs font-semibold text-[#102B46] shadow-xs">
+            <i className="bi bi-shield-check text-[#FF710D] text-sm" />
+            <span className="hidden sm:inline">100% Safe & Secure</span>
           </div>
         </div>
 

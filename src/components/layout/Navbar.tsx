@@ -64,7 +64,7 @@ export function Navbar() {
 
   const isItemActive = (href: string) => {
     if (href === "/about-us") {
-      return pathname.startsWith("/about");
+      return pathname === "/about-us" || pathname.startsWith("/about-us");
     }
     if (pathname === "/") {
       if (href === "/" && (activeSection === "home" || !activeSection)) {

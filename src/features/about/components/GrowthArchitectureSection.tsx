@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 
 interface ScaleTier {
   title: string;
@@ -71,7 +70,7 @@ export function GrowthArchitectureSection() {
         </div>
 
         {/* 3 Scalability Tiers (Point-wise cards, clean Bootstrap icons, NO images, NO emojis) */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
           {SCALE_TIERS.map((tier) => (
             <div
               key={tier.title}
@@ -103,28 +102,6 @@ export function GrowthArchitectureSection() {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Clean bottom navigation actions */}
-        <div className="flex flex-wrap items-center justify-between gap-4 pt-8 border-t border-[#F0E4D8]/80">
-          <p className="text-xs text-[#64748B]">
-            Eatery Cloud connects management, franchise, counter, and kitchen operations into a single ecosystem.
-          </p>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/login"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#FF710D] hover:bg-[#E65E00] text-white text-xs font-bold shadow-xs transition-all active:scale-95"
-            >
-              <span>Explore Portals</span>
-              <i className="bi bi-arrow-right text-xs"></i>
-            </Link>
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-gray-50 text-[#102B46] border border-[#F0E4D8] text-xs font-bold shadow-2xs transition-all active:scale-95"
-            >
-              <span>Back to Home</span>
-            </Link>
-          </div>
         </div>
       </div>
     </section>

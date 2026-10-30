@@ -53,12 +53,23 @@ export function AboutHeroSection() {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumb & Navigation Anchor Badges */}
+        {/* Breadcrumb Path & Navigation Anchor Badges */}
         <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FFF4EA] border border-[#FDE3CF] text-xs font-bold text-[#FF710D] tracking-wide uppercase">
-            <span className="w-2 h-2 rounded-full bg-[#FF710D] animate-pulse" />
-            <span>About Eatery Cloud</span>
-          </div>
+          {/* Breadcrumb Path */}
+          <nav aria-label="Breadcrumb" className="inline-flex items-center gap-2 text-xs">
+            <Link
+              href="/"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 hover:bg-[#FFF4EA] border border-[#F0E4D8] text-[#102B46] hover:text-[#FF710D] font-medium transition-colors shadow-2xs group"
+            >
+              <i className="bi bi-house-door text-xs group-hover:text-[#FF710D]"></i>
+              <span>Home</span>
+            </Link>
+            <i className="bi bi-chevron-right text-[10px] text-[#A0AEC0]"></i>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#FFF4EA] border border-[#FDE3CF] text-xs font-bold text-[#FF710D]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF710D] animate-pulse" />
+              <span>About Us</span>
+            </div>
+          </nav>
 
           {/* Quick jump navigation pills */}
           <nav aria-label="About page sections" className="hidden sm:flex items-center gap-2 text-xs font-semibold">
