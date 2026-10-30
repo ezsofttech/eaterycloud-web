@@ -4,24 +4,24 @@ export interface NavItem {
 }
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: "Home", href: "#home" },
-  { label: "About Us", href: "#about" },
-  { label: "Products", href: "#products" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about-us" },
+  { label: "Products", href: "/#products" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export const FOOTER_QUICK_LINKS = [
-  { label: "Home", href: "#home" },
-  { label: "About Us", href: "#about" },
-  { label: "Products", href: "#products" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about-us" },
+  { label: "Products", href: "/#products" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 export const FOOTER_FEATURE_LINKS = [
-  { label: "Order Management", href: "#products" },
-  { label: "Inventory Control", href: "#products" },
-  { label: "Reports & Analytics", href: "#products" },
-  { label: "Multi-Location Support", href: "#products" },
+  { label: "Order Management", href: "/#products" },
+  { label: "Inventory Control", href: "/#products" },
+  { label: "Reports & Analytics", href: "/#products" },
+  { label: "Multi-Location Support", href: "/#products" },
 ];
 
 export const CONTACT_INFO = {
@@ -29,4 +29,3 @@ export const CONTACT_INFO = {
   email: "support@eaterycloud.com",
   location: "India",
 };
-
