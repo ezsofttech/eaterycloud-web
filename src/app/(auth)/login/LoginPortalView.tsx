@@ -19,6 +19,9 @@ interface RoleConfig {
   roleDescription: string;
   destinationUrl: string;
   buttonText: string;
+  badgeIcon: string;
+  badgeTitle: string;
+  badgeSubtitle: string;
 }
 
 const ROLES: RoleConfig[] = [
@@ -37,6 +40,9 @@ const ROLES: RoleConfig[] = [
       "Your counter, tables, and checkout. Everything for a smoother service.",
     destinationUrl: "https://kiosk.eaterycloud.com/login",
     buttonText: "Continue to POS",
+    badgeIcon: "bi-lightning-charge-fill",
+    badgeTitle: "Fast Checkout POS",
+    badgeSubtitle: "Real-time Order Sync",
   },
   {
     id: "franchise",
@@ -53,6 +59,9 @@ const ROLES: RoleConfig[] = [
       "Oversee multi-branch sales, outlet inventory, staff shifts, and franchise reporting.",
     destinationUrl: "http://admin.eaterycloud.com/auth/login",
     buttonText: "Continue to Franchise",
+    badgeIcon: "bi-diagram-3-fill",
+    badgeTitle: "Multi-Outlet Cloud",
+    badgeSubtitle: "Live Inventory & Sales",
   },
   {
     id: "admin",
@@ -69,6 +78,9 @@ const ROLES: RoleConfig[] = [
       "Enterprise dashboard for owners and administrators. Manage users, menus, and reports.",
     destinationUrl: "https://superadmin.eaterycloud.com/auth/login",
     buttonText: "Continue to Admin",
+    badgeIcon: "bi-shield-check",
+    badgeTitle: "Enterprise Super Admin",
+    badgeSubtitle: "Full Menu & RBAC Control",
   },
 ];
 
@@ -176,135 +188,196 @@ export function LoginPortalView() {
   };
 
   return (
-    <div className="h-screen w-full flex flex-col lg:flex-row bg-[#FAF8F5] text-[#111827] selection:bg-[#FF710D]/20 selection:text-[#FF710D] overflow-hidden">
+    <div className="h-screen w-full flex flex-col lg:flex-row bg-[#FAF8F5] text-[#111827] selection:bg-[#FF710D]/20 selection:text-[#FF710D] overflow-hidden select-none">
       {/* ============================================================== */}
-      {/* LEFT: SLIDER HERO SIDE                                         */}
+      {/* LEFT: SLIDER HERO SIDE (FULL SCREEN COVER WITH CINEMATIC ZOOM) */}
       {/* ============================================================== */}
       <div
-        className="relative w-full lg:w-[48%] xl:w-[50%] h-[380px] lg:h-full shrink-0 overflow-hidden flex flex-col justify-between p-6 sm:p-8 lg:p-10 xl:p-12 select-none"
+        className="relative w-full lg:w-[48%] xl:w-[50%] h-[320px] sm:h-[360px] lg:h-full shrink-0 overflow-hidden flex flex-col justify-between p-6 sm:p-8 lg:p-10 xl:p-12 select-none bg-[#0B1726]"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        {/* Background Images with Crossfade */}
-        {ROLES.map((role, idx) => (
-          <div
-            key={role.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              idx === activeIndex ? "opacity-100 z-0 scale-100" : "opacity-0 -z-10 scale-105"
-            } transform transition-transform duration-[7000ms] ease-out`}
-          >
-            <Image
-              src={role.imageSrc}
-              alt={role.headlineHighlight}
-              fill
-              priority={idx === 0}
-              quality={95}
-              className="object-cover object-center"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-            {/* Gradient Dark Overlays for Readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/35" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/40" />
-          </div>
-        ))}
+        {/* Animated Background Images with Seamless Crossfade & No Flash */}
+        {ROLES.map((role, idx) => {
+          const isActive = idx === activeIndex;
+          return (
+            <div
+              key={role.id}
+              className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+              }`}
+            >
+              <Image
+                src={role.imageSrc}
+                alt={role.headlineHighlight}
+                fill
+                priority
+                quality={90}
+                className={`object-cover object-center transition-transform duration-[8000ms] ease-out ${
+                  isActive ? "scale-105" : "scale-100"
+                }`}
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+          );
+        })}
+
+        {/* Gradient Dark Overlays for Readability & Seamless Depth */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0B1726]/95 via-black/45 to-black/35 z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0B1726]/60 via-transparent to-black/35 z-10 pointer-events-none" />
 
         {/* Top Floating Logo Badge */}
-        <div className="relative z-10 flex items-center justify-between">
+        <div className="relative z-20 flex items-center justify-between">
           <Link
             href="/"
             title="Eatery Cloud Home"
-            className="group flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-white/95 hover:bg-white rounded-2xl shadow-xl border border-white/40 backdrop-blur-md transition-all duration-200 hover:scale-105"
+            className="group flex items-center gap-3 px-3.5 py-2 bg-white/95 hover:bg-white rounded-2xl shadow-xl border border-white/40 backdrop-blur-md transition-all duration-200 hover:scale-105"
           >
-            <div className="relative w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center">
+            <div className="relative w-7 h-7 flex items-center justify-center">
               <Image
                 src="/images/logo_orange.png"
                 alt="Eatery Cloud"
-                width={32}
-                height={32}
+                width={28}
+                height={28}
                 className="object-contain"
                 priority
               />
             </div>
+            <span className="text-sm font-bold text-neutral-900 tracking-tight">Eatery Cloud</span>
           </Link>
+
+          {/* Live system status badge */}
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-xs text-white/90 font-medium shadow-md">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span>Live System</span>
+          </div>
         </div>
 
-        {/* Center / Lower Content */}
-        <div className="relative z-10 max-w-lg mb-4 lg:mb-8">
-          {/* Overline Tagline */}
-          <div className="flex items-center gap-2 mb-2 sm:mb-3">
+        {/* Center Dynamic Content with Staggered Entrance Animations & Shimmer */}
+        <div key={activeRole.id} className="relative z-20 max-w-lg mb-4 lg:mb-8">
+          {/* Overline Tagline with Entrance Reveal */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/25 mb-3.5 shadow-md animate-text-reveal">
             <span className="w-1.5 h-1.5 rounded-full bg-[#FF710D]" />
             <span className="text-[11px] sm:text-xs font-bold tracking-[0.2em] text-[#FF9242] uppercase">
               {activeRole.tagline}
             </span>
           </div>
 
-          {/* Main Headline */}
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white leading-[1.12] tracking-tight mb-3 drop-shadow-sm">
-            <span>{activeRole.headlinePrefix}</span>
-            <span className="text-[#FF710D]">{activeRole.headlineHighlight}</span>
-            {activeRole.headlineSuffix && <span>{activeRole.headlineSuffix}</span>}
+          {/* Main Headline with Staggered Word Reveal & Shimmer Glow */}
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-white leading-[1.14] tracking-tight drop-shadow-md">
+            <span className="block animate-text-reveal-delay-1">{activeRole.headlinePrefix}</span>
+            <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#FF710D] via-[#FFA85C] to-[#FF710D] animate-shimmer-brand animate-text-reveal-delay-2 drop-shadow-sm">
+              {activeRole.headlineHighlight}
+            </span>
           </h2>
+        </div>
 
-          {/* Subtitle Description */}
-          <p className="text-xs sm:text-sm lg:text-base text-gray-200/90 leading-relaxed max-w-md drop-shadow">
-            {activeRole.description}
-          </p>
+        {/* Floating Glassmorphism Metric Pill (Animated Levitation) */}
+        <div
+          key={`badge-${activeRole.id}`}
+          className="absolute right-6 sm:right-10 top-1/2 -translate-y-1/2 z-20 hidden xl:flex items-center gap-3.5 px-4 py-3 rounded-2xl bg-black/50 backdrop-blur-xl border border-white/20 shadow-2xl text-white animate-card-float select-none"
+        >
+          <div className="w-10 h-10 rounded-xl bg-[#FF710D]/25 border border-[#FF710D]/50 flex items-center justify-center text-[#FF710D] text-lg shadow-sm">
+            <i className={`bi ${activeRole.badgeIcon}`} />
+          </div>
+          <div>
+            <div className="text-[10px] font-bold text-gray-300 tracking-wider uppercase">
+              {activeRole.badgeTitle}
+            </div>
+            <div className="text-xs font-bold text-white flex items-center gap-1.5 mt-0.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              {activeRole.badgeSubtitle}
+            </div>
+          </div>
         </div>
 
         {/* Bottom Slide Indicators with Role Icons and Dotted Connectors */}
-        <div className="relative z-10 w-full flex items-center justify-center gap-3 pt-1 pb-1">
-          {ROLES.map((role, idx) => {
-            const isActive = idx === activeIndex;
-            return (
-              <React.Fragment key={role.id}>
-                {/* Role Icon Button */}
-                <button
-                  type="button"
-                  onClick={() => handleRoleSelect(role.id)}
-                  aria-label={`Switch to ${role.name} slider`}
-                  className={`group relative p-2 rounded-xl transition-all duration-300 flex items-center justify-center ${
-                    isActive
-                      ? "text-[#FF710D] bg-white/15 ring-2 ring-[#FF710D]/80 shadow-md scale-105"
-                      : "text-gray-400 hover:text-white hover:bg-white/10"
-                  }`}
-                >
-                  <RoleIcon id={role.id} className="w-5 h-5 transition-transform group-hover:scale-110" />
-                  {isActive && (
-                    <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#FF710D] rounded-full" />
-                  )}
-                </button>
+        <div className="relative z-20 w-full flex items-center justify-between pt-2">
+          <div className="flex items-center gap-2 sm:gap-3">
+            {ROLES.map((role, idx) => {
+              const isActive = idx === activeIndex;
+              return (
+                <React.Fragment key={role.id}>
+                  <button
+                    type="button"
+                    onClick={() => handleRoleSelect(role.id)}
+                    aria-label={`Switch to ${role.name} slider`}
+                    className={`group relative flex items-center gap-2 px-3 py-2 rounded-xl transition-all duration-300 cursor-pointer ${
+                      isActive
+                        ? "text-white bg-white/20 ring-1 ring-[#FF710D] shadow-md backdrop-blur-md scale-105"
+                        : "text-gray-300 hover:text-white hover:bg-white/10"
+                    }`}
+                  >
+                    <RoleIcon id={role.id} className={`w-4 h-4 ${isActive ? "text-[#FF710D]" : "text-gray-400 group-hover:text-white"}`} />
+                    <span className="text-xs font-semibold">{role.name}</span>
+                    {isActive && (
+                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#FF710D] rounded-full" />
+                    )}
+                  </button>
 
-                {/* Dotted Line Connector between items */}
-                {idx < ROLES.length - 1 && (
-                  <div className="w-10 sm:w-14 border-t-2 border-dotted border-white/30" />
-                )}
-              </React.Fragment>
-            );
-          })}
+                  {idx < ROLES.length - 1 && (
+                    <div className="w-6 sm:w-10 border-t border-dashed border-white/25" />
+                  )}
+                </React.Fragment>
+              );
+            })}
+          </div>
+
+          {/* Auto-Slide Progress Bar */}
+          <div className="hidden sm:flex items-center gap-2 px-2.5 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/15">
+            <div className="w-12 h-1 bg-white/20 rounded-full overflow-hidden">
+              <div
+                key={`${selectedRole}-${isPaused}`}
+                className={`h-full bg-[#FF710D] rounded-full ${
+                  isPaused ? "w-0" : "w-full transition-all duration-[7000ms] ease-linear"
+                }`}
+                style={{ width: isPaused ? "100%" : undefined }}
+              />
+            </div>
+          </div>
         </div>
       </div>
 
       {/* ============================================================== */}
-      {/* RIGHT: LOGIN SELECTION FORM (NO SCROLL ON SCREEN)              */}
+      {/* RIGHT: LOGIN SELECTION FORM (ONE SCREEN FIT, NO SCROLL)        */}
       {/* ============================================================== */}
-      <div className="flex-1 h-full flex flex-col justify-between px-6 sm:px-10 lg:px-12 xl:px-16 py-6 sm:py-8 lg:py-8 bg-[#FAF8F5] overflow-y-auto lg:overflow-hidden">
-        {/* Top Navigation: pretty bootstrap back icon */}
-        <div className="shrink-0">
-          <Link
-            href="/"
-            title="Back to home"
-            aria-label="Back to home"
-            className="group inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/90 hover:bg-white border border-[#E7DFD5] hover:border-[#FF710D]/40 text-neutral-600 hover:text-[#FF710D] shadow-xs hover:shadow-sm transition-all duration-200"
-          >
-            <i className="bi bi-arrow-left text-lg transition-transform group-hover:-translate-x-0.5" />
-          </Link>
+      <div className="flex-1 h-full flex flex-col justify-between px-6 sm:px-10 lg:px-12 xl:px-16 py-6 sm:py-8 lg:py-8 bg-[#FAF8F5] relative overflow-hidden">
+        {/* Subtle decorative ambient glow at top right */}
+        <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-[#FF710D]/10 via-transparent to-transparent pointer-events-none rounded-bl-full blur-2xl" />
+
+        {/* Top Navigation: Breadcrumb path matching theme */}
+        <div className="shrink-0 flex items-center justify-between relative z-10">
+          <nav aria-label="Breadcrumb">
+            <ol className="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 py-1.5 rounded-xl bg-white/90 hover:bg-white border border-[#E7DFD5] hover:border-[#FF710D]/30 shadow-xs text-xs sm:text-sm font-medium transition-all duration-200">
+              <li className="inline-flex items-center">
+                <Link
+                  href="/"
+                  title="Back to Home"
+                  className="text-neutral-600 hover:text-[#FF710D] transition-colors"
+                >
+                  Home
+                </Link>
+              </li>
+              <li className="text-neutral-300 select-none flex items-center" aria-hidden="true">
+                <i className="bi bi-chevron-right text-[10px]" />
+              </li>
+              <li className="inline-flex items-center text-[#FF710D] font-semibold" aria-current="page">
+                Login
+              </li>
+            </ol>
+          </nav>
+
+          <div className="flex items-center gap-1.5 text-xs font-medium text-neutral-400">
+            <i className="bi bi-shield-check text-emerald-600" />
+            <span className="hidden sm:inline">256-Bit SSL Encrypted</span>
+          </div>
         </div>
 
         {/* Main Content Form Card */}
-        <div className="max-w-md w-full mx-auto my-auto py-2 shrink-0">
+        <div className="max-w-md w-full mx-auto my-auto py-2 shrink-0 relative z-10">
           {/* Welcome Tag */}
-          <div className="flex items-center gap-1.5 mb-1.5 sm:mb-2">
-            <span className="inline-block w-1.5 h-1.5 bg-[#FF710D] rounded-xs" />
+          <div className="flex items-center gap-1.5 mb-2">
+            <span className="inline-block w-1.5 h-1.5 bg-[#FF710D] rounded-xs animate-pulse" />
             <span className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#FF710D]">
               WELCOME TO EATERY CLOUD
             </span>
@@ -318,115 +391,78 @@ export function LoginPortalView() {
           </h1>
 
           {/* Subtitle */}
-          <p className="text-xs sm:text-sm text-neutral-500 mb-4 sm:mb-5 leading-relaxed">
+          <p className="text-xs sm:text-sm text-neutral-500 mb-4 leading-relaxed">
             Choose your role and we&apos;ll take you to the right login page.
           </p>
 
-          {/* Role Dropdown Selector */}
-          <div className="space-y-3 sm:space-y-3.5">
-            <div>
-              <label className="block text-[11px] sm:text-xs font-bold text-neutral-700 tracking-wide mb-1.5">
-                I&apos;m logging in to
-              </label>
-
-              <div className="relative" ref={dropdownRef}>
+          {/* Interactive Segmented Switcher */}
+          <div className="p-1.5 bg-neutral-100/90 rounded-2xl border border-[#E7DFD5] flex items-center gap-1 mb-3.5 shadow-inner">
+            {ROLES.map((role) => {
+              const isSelected = role.id === selectedRole;
+              return (
                 <button
+                  key={role.id}
                   type="button"
-                  onClick={() => setDropdownOpen((prev) => !prev)}
-                  className="w-full flex items-center justify-between px-4 py-3 bg-white border border-[#E7DFD5] hover:border-[#FF710D]/60 rounded-xl shadow-xs transition-all text-left focus:outline-none focus:ring-2 focus:ring-[#FF710D]/30"
+                  onClick={() => handleRoleSelect(role.id)}
+                  className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-semibold transition-all duration-300 cursor-pointer ${
+                    isSelected
+                      ? "bg-white text-neutral-900 shadow-sm border border-[#E7DFD5]/80 ring-1 ring-[#FF710D]/30 scale-[1.02]"
+                      : "text-neutral-500 hover:text-neutral-800 hover:bg-white/60"
+                  }`}
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="text-neutral-700">
-                      <RoleIcon id={activeRole.id} className="w-5 h-5 text-neutral-600" />
-                    </div>
-                    <span className="text-sm font-semibold text-neutral-900">
-                      {activeRole.name}
-                    </span>
-                  </div>
-                  <i
-                    className={`bi bi-chevron-down text-xs text-neutral-400 transition-transform duration-200 ${
-                      dropdownOpen ? "rotate-180 text-[#FF710D]" : ""
-                    }`}
+                  <RoleIcon
+                    id={role.id}
+                    className={`w-4 h-4 transition-colors ${isSelected ? "text-[#FF710D]" : "text-neutral-400"}`}
                   />
+                  <span>{role.name}</span>
                 </button>
+              );
+            })}
+          </div>
 
-                {/* Dropdown Options */}
-                {dropdownOpen && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-[#E7DFD5] py-1.5 z-30 animate-fade-in">
-                    {ROLES.map((role) => (
-                      <button
-                        key={role.id}
-                        type="button"
-                        onClick={() => handleRoleSelect(role.id)}
-                        className={`w-full flex items-center justify-between px-4 py-2.5 sm:py-3 text-left transition-colors ${
-                          role.id === selectedRole
-                            ? "bg-orange-50/70 text-[#FF710D]"
-                            : "hover:bg-neutral-50 text-neutral-700"
-                        }`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <RoleIcon
-                            id={role.id}
-                            className={`w-5 h-5 ${
-                              role.id === selectedRole ? "text-[#FF710D]" : "text-neutral-500"
-                            }`}
-                          />
-                          <div>
-                            <div className="text-sm font-semibold">{role.name}</div>
-                            <div className="text-xs text-neutral-500">{role.roleTitle}</div>
-                          </div>
-                        </div>
-                        {role.id === selectedRole && (
-                          <i className="bi bi-check2 text-lg text-[#FF710D]" />
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
+          {/* Selected Role Detailed Card with smooth keyframe dissolve */}
+          <div
+            key={activeRole.id}
+            className="flex items-center gap-3.5 p-3.5 sm:p-4 bg-white/95 border border-[#ECE2D8] rounded-2xl shadow-xs mb-4 animate-slide-fade"
+          >
+            <div className="w-11 h-11 rounded-xl bg-orange-50 border border-orange-200/80 flex items-center justify-center shrink-0 text-[#FF710D] shadow-xs">
+              <RoleIcon id={activeRole.id} className="w-5 h-5 text-[#FF710D]" />
             </div>
-
-            {/* Selected Role Detailed Card */}
-            <div className="flex items-center gap-3.5 p-3 sm:p-3.5 bg-white/80 border border-[#ECE2D8] rounded-xl shadow-xs">
-              <div className="w-10 h-10 rounded-xl bg-orange-50/90 border border-orange-200/80 flex items-center justify-center shrink-0 text-[#FF710D]">
-                <RoleIcon id={activeRole.id} className="w-5 h-5 text-[#FF710D]" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <h4 className="text-xs font-bold text-neutral-900 mb-0.5 truncate">
-                  {activeRole.roleTitle}
-                </h4>
-                <p className="text-[11px] sm:text-xs text-neutral-500 leading-snug line-clamp-2">
-                  {activeRole.roleDescription}
-                </p>
-              </div>
+            <div className="flex-1 min-w-0">
+              <h4 className="text-xs sm:text-sm font-bold text-neutral-900 mb-0.5 truncate">
+                {activeRole.roleTitle}
+              </h4>
+              <p className="text-[11px] sm:text-xs text-neutral-500 leading-snug line-clamp-2">
+                {activeRole.roleDescription}
+              </p>
             </div>
+          </div>
 
-            {/* Main Action Button */}
-            <button
-              type="button"
-              onClick={handleContinue}
-              className="w-full flex items-center justify-between px-5 sm:px-6 py-3 sm:py-3.5 bg-[#FF710D] hover:bg-[#EA6200] active:scale-[0.99] text-white rounded-xl font-bold text-sm sm:text-base shadow-md hover:shadow-lg transition-all duration-150 group cursor-pointer"
-            >
-              <span className="font-semibold">{activeRole.buttonText}</span>
-              <i className="bi bi-arrow-right transition-transform group-hover:translate-x-1" />
-            </button>
+          {/* Main Action Button */}
+          <button
+            type="button"
+            onClick={handleContinue}
+            className="w-full flex items-center justify-between px-5 sm:px-6 py-3 sm:py-3.5 bg-gradient-to-r from-[#FF710D] to-[#FF852E] hover:from-[#EA6200] hover:to-[#FF710D] active:scale-[0.99] text-white rounded-xl font-bold text-sm sm:text-base shadow-lg shadow-[#FF710D]/25 hover:shadow-xl hover:shadow-[#FF710D]/35 transition-all duration-200 group cursor-pointer"
+          >
+            <span className="font-semibold">{activeRole.buttonText}</span>
+            <i className="bi bi-arrow-right transition-transform group-hover:translate-x-1.5" />
+          </button>
 
-            {/* Security Notice */}
-            <div className="flex items-center justify-center gap-1.5 pt-2 text-[11px] text-neutral-500 text-center">
-              <i className="bi bi-lock-fill text-neutral-400 text-xs" />
-              <span>
-                Sign in securely on your destination page. No passwords collected here.
-              </span>
-            </div>
+          {/* Security Notice */}
+          <div className="flex items-center justify-center gap-1.5 pt-2.5 text-[11px] text-neutral-500 text-center">
+            <i className="bi bi-lock-fill text-neutral-400 text-xs" />
+            <span>
+              Sign in securely on your destination page. No passwords collected here.
+            </span>
           </div>
         </div>
 
         {/* Bottom Help Link */}
-        <div className="shrink-0 pt-2 sm:pt-4 text-center text-xs text-neutral-500">
+        <div className="shrink-0 pt-2 text-center text-xs text-neutral-500 relative z-10">
           <span>Need a hand? </span>
           <a
             href="mailto:support@eaterycloud.com"
-            className="font-semibold text-neutral-700 hover:text-[#FF710D] underline decoration-neutral-300 hover:decoration-[#FF710D] inline-flex items-center gap-1"
+            className="font-semibold text-neutral-700 hover:text-[#FF710D] underline decoration-neutral-300 hover:decoration-[#FF710D] inline-flex items-center gap-1 transition-colors"
           >
             <span>Talk to us</span>
             <i className="bi bi-box-arrow-up-right text-[10px]" />

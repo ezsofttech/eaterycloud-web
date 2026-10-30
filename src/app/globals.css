@@ -140,3 +140,111 @@ body {
 .animate-order-entrance {
   animation: orderCardEntranceFuturistic 1.5s cubic-bezier(0.16, 1, 0.3, 1) 1.0s both;
 }
+
+/* Vertex Dribbble Style Container Entrance & Micro-animations */
+@keyframes containerEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.97) translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-container-in {
+  animation: containerEntrance 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes slideFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-fade {
+  animation: slideFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Apple / Dribbble hero text entrance with blur */
+@keyframes heroTextEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.98);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+.animate-hero-text {
+  animation: heroTextEntrance 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes ambientGlowPulse {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.06);
+  }
+}
+
+.animate-ambient-pulse {
+  animation: ambientGlowPulse 7s ease-in-out infinite;
+}
+
+/* Shimmering gradient highlight for brand orange text */
+@keyframes textShimmerWave {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-shimmer-brand {
+  background-size: 200% auto;
+  animation: textShimmerWave 4s ease-in-out infinite;
+}
+
+/* Staggered text entrance animations with smooth blur dissolve */
+@keyframes textRevealUp {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.animate-text-reveal {
+  animation: textRevealUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-text-reveal-delay-1 {
+  animation: textRevealUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+}
+
+.animate-text-reveal-delay-2 {
+  animation: textRevealUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.16s both;
+}
