@@ -2,12 +2,6 @@ import React from "react";
 import Link from "next/link";
 import { Logo } from "../ui/Logo";
 import {
-  FacebookIcon,
-  InstagramIcon,
-  LinkedinIcon,
-  YoutubeIcon,
-} from "../ui/Icons";
-import {
   FOOTER_QUICK_LINKS,
   FOOTER_FEATURE_LINKS,
   CONTACT_INFO,

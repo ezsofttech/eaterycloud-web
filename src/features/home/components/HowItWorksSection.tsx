@@ -45,17 +45,19 @@ export function HowItWorksSection() {
             </div>
           </div>
 
-          {/* Right Column: Dashboard & Phone Mockup */}
+          {/* Right Column: Dashboard Mockup */}
           <div className="lg:col-span-7 relative flex items-center justify-center">
-            <div className="relative w-full max-w-2xl drop-shadow-lg">
+            {/* Ambient Background Warm Glow */}
+            <div className="absolute -inset-4 bg-gradient-to-tr from-[#FF710D]/10 via-[#FFA85C]/15 to-transparent rounded-3xl blur-2xl -z-10 pointer-events-none" />
+
+            <div className="relative w-full max-w-2xl drop-shadow-xl hover:scale-[1.01] transition-transform duration-300">
               <Image
-                src="/images/02_dashboard_and_mobile_mockup.png"
-                alt="Eatery Cloud Dashboard and Mobile POS Interface Mockup"
-                width={1536}
-                height={1024}
-                unoptimized
+                src="/images/dashboard-site.jpeg"
+                alt="Eatery Cloud Central Management Dashboard on Desktop"
+                width={1509}
+                height={893}
                 priority
-                className="w-full h-auto object-contain select-none"
+                className="w-full h-auto object-contain select-none rounded-xl"
               />
             </div>
           </div>

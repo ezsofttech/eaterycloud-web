@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -17,7 +17,7 @@ interface RoleConfig {
   imageSrc: string;
   roleTitle: string;
   roleDescription: string;
-  destinationUrl: string;
+  destinationUrl?: string;
   buttonText: string;
   badgeIcon: string;
   badgeTitle: string;
@@ -38,7 +38,7 @@ const ROLES: RoleConfig[] = [
     roleTitle: "Front of house",
     roleDescription:
       "Your counter, tables, and checkout. Everything for a smoother service.",
-    destinationUrl: "https://kiosk.eaterycloud.com/login",
+    destinationUrl: process.env.NEXT_PUBLIC_POS,
     buttonText: "Continue to POS",
     badgeIcon: "bi-lightning-charge-fill",
     badgeTitle: "Fast Checkout POS",
@@ -57,7 +57,7 @@ const ROLES: RoleConfig[] = [
     roleTitle: "Franchise & Branch Management",
     roleDescription:
       "Oversee multi-branch sales, outlet inventory, staff shifts, and franchise reporting.",
-    destinationUrl: "http://admin.eaterycloud.com/auth/login",
+    destinationUrl: process.env.NEXT_PUBLIC_FRANCHISE,
     buttonText: "Continue to Franchise",
     badgeIcon: "bi-diagram-3-fill",
     badgeTitle: "Multi-Outlet Cloud",
@@ -76,7 +76,7 @@ const ROLES: RoleConfig[] = [
     roleTitle: "Super Admin Workspace",
     roleDescription:
       "Enterprise dashboard for owners and administrators. Manage users, menus, and reports.",
-    destinationUrl: "https://superadmin.eaterycloud.com/auth/login",
+    destinationUrl: process.env.NEXT_PUBLIC_ADMIN,
     buttonText: "Continue to Admin",
     badgeIcon: "bi-shield-check",
     badgeTitle: "Enterprise Super Admin",
@@ -141,9 +141,7 @@ function RoleIcon({ id, className = "w-5 h-5" }: { id: RoleId; className?: strin
 
 export function LoginPortalView() {
   const [selectedRole, setSelectedRole] = useState<RoleId>("pos");
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const activeIndex = ROLES.findIndex((r) => r.id === selectedRole);
   const activeRole = ROLES[activeIndex] || ROLES[0];
@@ -163,28 +161,26 @@ export function LoginPortalView() {
     return () => clearInterval(timer);
   }, [isPaused]);
 
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setDropdownOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
   const handleRoleSelect = (roleId: RoleId) => {
     setSelectedRole(roleId);
-    setDropdownOpen(false);
     setIsPaused(true);
   };
 
   const handleContinue = () => {
-    window.location.href = activeRole.destinationUrl;
+    const targetUrl =
+      (activeRole.id === "pos"
+        ? process.env.NEXT_PUBLIC_POS
+        : activeRole.id === "franchise"
+        ? process.env.NEXT_PUBLIC_FRANCHISE
+        : process.env.NEXT_PUBLIC_ADMIN) || activeRole.destinationUrl;
+
+    console.log("Redirect URL:", targetUrl);
+
+    if (targetUrl) {
+      window.location.href = targetUrl;
+    } else {
+      console.log(`Destination URL not set for role: ${activeRole.id}`);
+    }
   };
 
   return (
@@ -226,8 +222,8 @@ export function LoginPortalView() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0B1726]/95 via-black/45 to-black/35 z-10 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0B1726]/60 via-transparent to-black/35 z-10 pointer-events-none" />
 
-        {/* Top Floating Logo Badge */}
-        <div className="relative z-20 flex items-center justify-between">
+        {/* Top Header: Logo & Role Status Badge */}
+        <div className="relative z-20 flex items-center justify-between gap-3">
           <Link
             href="/"
             title="Eatery Cloud Home"
@@ -244,10 +240,23 @@ export function LoginPortalView() {
             />
           </Link>
 
-          {/* Live system status badge */}
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-xs text-white/90 font-medium shadow-md">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span>Live System</span>
+          {/* Role Status Badge (replaces Live System) */}
+          <div
+            key={`badge-${activeRole.id}`}
+            className="flex items-center gap-3 px-3.5 py-2 rounded-2xl bg-black/50 backdrop-blur-xl border border-white/20 shadow-2xl text-white select-none transition-all duration-300"
+          >
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#FF710D]/25 border border-[#FF710D]/50 flex items-center justify-center text-[#FF710D] text-base sm:text-lg shadow-sm shrink-0">
+              <i className={`bi ${activeRole.badgeIcon}`} />
+            </div>
+            <div>
+              <div className="text-[10px] font-bold text-gray-300 tracking-wider uppercase leading-none">
+                {activeRole.badgeTitle}
+              </div>
+              <div className="text-xs font-bold text-white flex items-center gap-1.5 mt-1 leading-none">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                <span>{activeRole.badgeSubtitle}</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -268,25 +277,6 @@ export function LoginPortalView() {
               {activeRole.headlineHighlight}
             </span>
           </h2>
-        </div>
-
-        {/* Floating Glassmorphism Metric Pill (Animated Levitation) */}
-        <div
-          key={`badge-${activeRole.id}`}
-          className="absolute right-6 sm:right-10 top-1/2 -translate-y-1/2 z-20 hidden xl:flex items-center gap-3.5 px-4 py-3 rounded-2xl bg-black/50 backdrop-blur-xl border border-white/20 shadow-2xl text-white animate-card-float select-none"
-        >
-          <div className="w-10 h-10 rounded-xl bg-[#FF710D]/25 border border-[#FF710D]/50 flex items-center justify-center text-[#FF710D] text-lg shadow-sm">
-            <i className={`bi ${activeRole.badgeIcon}`} />
-          </div>
-          <div>
-            <div className="text-[10px] font-bold text-gray-300 tracking-wider uppercase">
-              {activeRole.badgeTitle}
-            </div>
-            <div className="text-xs font-bold text-white flex items-center gap-1.5 mt-0.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              {activeRole.badgeSubtitle}
-            </div>
-          </div>
         </div>
 
         {/* Bottom Slide Indicators with Role Icons and Dotted Connectors */}

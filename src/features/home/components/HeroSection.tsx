@@ -334,7 +334,7 @@ export function HeroSection() {
                         POS-001552
                       </span>
                       <span className="text-[9px] font-mono opacity-80 ml-0.5">
-                        // TAKEOFF
+                        {"// TAKEOFF"}
                       </span>
                     </div>
                     <i className="bi bi-arrow-right text-xs"></i>
