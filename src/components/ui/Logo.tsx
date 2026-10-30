@@ -4,6 +4,7 @@ import Link from "next/link";
 interface LogoProps {
   variant?: "light" | "dark";
   size?: "sm" | "md" | "lg";
+  iconOnly?: boolean;
   className?: string;
   href?: string;
 }
@@ -11,48 +12,46 @@ interface LogoProps {
 export function Logo({
   variant = "dark",
   size = "md",
+  iconOnly = false,
   className = "",
   href = "/",
 }: LogoProps) {
   const sizeMap = {
-    sm: { icon: 28, text: "text-lg" },
-    md: { icon: 34, text: "text-xl" },
-    lg: { icon: 44, text: "text-2xl" },
+    sm: { height: 28, width: 127, iconSize: 28 },
+    md: { height: 36, width: 164, iconSize: 36 },
+    lg: { height: 44, width: 200, iconSize: 44 },
   };
 
-  const { icon, text } = sizeMap[size];
+  const { height, width, iconSize } = sizeMap[size];
+  const logoSrc =
+    variant === "light"
+      ? "/images/eatery-logo-white.png"
+      : "/images/eatery-logo.png";
 
   const content = (
-    <div className={`inline-flex items-center gap-2.5 select-none ${className}`}>
-      {/* Orange Logo Mark from pic2 */}
-      <div className="relative shrink-0 flex items-center justify-center">
+    <div className={`inline-flex items-center select-none ${className}`}>
+      {iconOnly ? (
+        <div className="relative shrink-0 flex items-center justify-center">
+          <Image
+            src="/images/logo_orange.png"
+            alt="Eatery Cloud Emblem"
+            width={iconSize}
+            height={iconSize}
+            className="object-contain"
+            priority
+          />
+        </div>
+      ) : (
         <Image
-          src="/images/logo_orange.png"
-          alt="Eatery Cloud Logo Mark"
-          width={icon}
-          height={icon}
-          className="object-contain"
+          src={logoSrc}
+          alt="Eatery Cloud Logo"
+          width={width}
+          height={height}
+          style={{ height: `${height}px`, width: "auto" }}
+          className="object-contain shrink-0"
           priority
         />
-      </div>
-
-      {/* Brand Name Typography */}
-      <div className="flex items-center tracking-tight leading-none">
-        <span
-          className={`font-black tracking-wider ${text} ${
-            variant === "light" ? "text-white" : "text-[#102B46]"
-          }`}
-        >
-          EATERY
-        </span>
-        <span
-          className={`font-normal ml-1.5 tracking-wide ${text} ${
-            variant === "light" ? "text-gray-300" : "text-[#102B46]/80"
-          }`}
-        >
-          CLOUD
-        </span>
-      </div>
+      )}
     </div>
   );
 
@@ -60,7 +59,7 @@ export function Logo({
     return (
       <Link
         href={href}
-        className="transition-opacity hover:opacity-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF710D] rounded-md"
+        className="transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF710D] rounded-md inline-flex items-center"
         aria-label="Eatery Cloud Home"
       >
         {content}

@@ -231,19 +231,17 @@ export function LoginPortalView() {
           <Link
             href="/"
             title="Eatery Cloud Home"
-            className="group flex items-center gap-3 px-3.5 py-2 bg-white/95 hover:bg-white rounded-2xl shadow-xl border border-white/40 backdrop-blur-md transition-all duration-200 hover:scale-105"
+            className="group flex items-center px-3.5 py-2 bg-white/95 hover:bg-white rounded-2xl shadow-xl border border-white/40 backdrop-blur-md transition-all duration-200 hover:scale-105"
           >
-            <div className="relative w-7 h-7 flex items-center justify-center">
-              <Image
-                src="/images/logo_orange.png"
-                alt="Eatery Cloud"
-                width={28}
-                height={28}
-                className="object-contain"
-                priority
-              />
-            </div>
-            <span className="text-sm font-bold text-neutral-900 tracking-tight">Eatery Cloud</span>
+            <Image
+              src="/images/eatery-logo.png"
+              alt="Eatery Cloud"
+              width={127}
+              height={28}
+              style={{ height: "26px", width: "auto" }}
+              className="object-contain"
+              priority
+            />
           </Link>
 
           {/* Live system status badge */}
