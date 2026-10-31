@@ -23,7 +23,7 @@ export function FeaturesSection() {
   };
 
   return (
-    <section id="products" className="py-20 lg:py-24 bg-white">
+    <section id="products" className="py-20 lg:py-24 bg-white scroll-mt-20 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           {/* Left Column: Heading and Overview */}
@@ -60,7 +60,13 @@ export function FeaturesSection() {
           <div className="lg:col-span-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-10 gap-x-8">
               {KEY_FEATURES.map((feature) => (
-                <div key={feature.id} className="flex flex-col items-start">
+                <div
+                  key={feature.id}
+                  id={feature.id === "inventory-ctrl" ? "inventory" : undefined}
+                  className={`flex flex-col items-start ${
+                    feature.id === "inventory-ctrl" ? "scroll-mt-32" : ""
+                  }`}
+                >
                   {/* Circular Orange Icon Container */}
                   <div className="w-11 h-11 rounded-full bg-[#FFF4EA] border border-[#FDE3CF] flex items-center justify-center mb-4">
                     {getFeatureIcon(feature.icon)}

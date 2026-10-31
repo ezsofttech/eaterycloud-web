@@ -84,8 +84,10 @@ export function InvoiceFeatureSection() {
   return (
     <section
       id="invoicing"
-      className="py-8 lg:py-12 bg-[#FFF7EE] relative overflow-hidden flex items-center min-h-[calc(100vh-80px)]"
+      className="py-8 lg:py-12 bg-[#FFF7EE] relative overflow-hidden flex items-center min-h-[calc(100vh-80px)] scroll-mt-20"
     >
+      {/* Anchor identifier for POS & Billing navigation */}
+      <span id="pos-billing" className="absolute top-0 -mt-20 scroll-mt-20" />
       {/* Background Subtle Gradient Rings */}
       <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-[#FF710D]/5 pointer-events-none blur-3xl" />
       <div className="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-[#FF710D]/5 pointer-events-none blur-3xl" />

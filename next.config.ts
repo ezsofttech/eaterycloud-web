@@ -2,6 +2,20 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  async redirects() {
+    return [
+      {
+        source: "/products/pos-billing",
+        destination: "/#pos-billing",
+        permanent: false,
+      },
+      {
+        source: "/products/inventory",
+        destination: "/#inventory",
+        permanent: false,
+      },
+    ];
+  },
   images: {
     qualities: [75, 90],
   },
