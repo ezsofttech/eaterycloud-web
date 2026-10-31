@@ -45,28 +45,17 @@ const SCALE_TIERS: ScaleTier[] = [
 
 export function GrowthArchitectureSection() {
   return (
-    <section id="growth" className="py-20 lg:py-24 bg-white">
+    <section id="growth" className="py-16 lg:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mb-14">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#FF710D] mb-3">
-            BUSINESS SCALABILITY
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#102B46] tracking-tight leading-[1.2] mb-4">
+        {/* Left-Aligned Clean Section Header */}
+        <div className="max-w-3xl mb-10 text-left">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF0E2] border border-[#FFDEC0] text-[#FF710D] text-xs font-bold tracking-wide uppercase mb-3 shadow-2xs">
+            <i className="bi bi-graph-up-arrow text-xs"></i>
+            <span>Business Scalability</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#102B46] tracking-tight leading-tight">
             Designed for Growing Restaurant Businesses
           </h2>
-          <div className="space-y-3 text-sm sm:text-base text-[#64748B] leading-relaxed">
-            <p>
-              Every restaurant has its own way of working. Eatery Cloud is built around a structured
-              approach that separates administrative responsibilities, franchise management, and
-              daily restaurant operations while connecting the devices used throughout the ordering
-              process.
-            </p>
-            <p>
-              Whether a business operates a single outlet or manages a franchise network, the
-              platform provides a foundation for organizing restaurant workflows in a more
-              connected way.
-            </p>
-          </div>
         </div>
 
         {/* 3 Scalability Tiers (Point-wise cards, clean Bootstrap icons, NO images, NO emojis) */}
@@ -74,20 +63,20 @@ export function GrowthArchitectureSection() {
           {SCALE_TIERS.map((tier) => (
             <div
               key={tier.title}
-              className="p-7 rounded-2xl bg-[#FFFDF9] border border-[#F0E4D8] hover:border-[#FF710D]/50 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+              className="p-6 sm:p-7 rounded-2xl bg-[#FFFDF9] border border-[#F0E4D8] hover:border-[#FF710D]/50 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between text-left"
             >
               <div>
-                <div className="w-12 h-12 rounded-xl bg-[#FFF4EA] border border-[#FDE3CF] flex items-center justify-center text-[#FF710D] text-xl mb-4">
+                <div className="w-11 h-11 rounded-xl bg-[#FFF4EA] border border-[#FDE3CF] flex items-center justify-center text-[#FF710D] text-lg mb-3 shadow-2xs">
                   <i className={`bi ${tier.icon}`}></i>
                 </div>
                 <h3 className="text-lg font-bold text-[#102B46] mb-1">
                   {tier.title}
                 </h3>
-                <p className="text-xs font-semibold text-[#FF710D] uppercase tracking-wider mb-5 pb-3 border-b border-[#F0E4D8]">
+                <p className="text-xs font-semibold text-[#FF710D] uppercase tracking-wider mb-4 pb-3 border-b border-[#F0E4D8]">
                   {tier.scope}
                 </p>
 
-                <div className="space-y-3">
+                <div className="space-y-2.5">
                   {tier.points.map((pt, idx) => (
                     <div key={idx} className="flex items-start gap-2.5">
                       <div className="shrink-0 w-4 h-4 rounded-full bg-[#FFF4EA] text-[#FF710D] flex items-center justify-center text-[10px] mt-0.5 font-bold">

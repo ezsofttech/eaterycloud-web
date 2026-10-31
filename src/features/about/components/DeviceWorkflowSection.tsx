@@ -79,32 +79,29 @@ const WORKFLOW_STEPS = [
 
 export function DeviceWorkflowSection() {
   return (
-    <section id="devices" className="py-20 lg:py-24 bg-[#FFF7EE] border-b border-[#F0E4D8]/70">
+    <section id="devices" className="py-16 lg:py-20 bg-[#FFF7EE] border-b border-[#F0E4D8]/70">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="max-w-3xl mb-14">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#FF710D] mb-3">
-            CONNECTED HARDWARE WORKFLOW
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#102B46] tracking-tight leading-[1.2] mb-4">
+        {/* Left-Aligned Clean Section Header */}
+        <div className="max-w-3xl mb-10 text-left">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF0E2] border border-[#FFDEC0] text-[#FF710D] text-xs font-bold tracking-wide uppercase mb-3 shadow-2xs">
+            <i className="bi bi-cpu-fill text-xs"></i>
+            <span>Connected Hardware Workflow</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#102B46] tracking-tight leading-tight">
             Three Device Types. One Connected Workflow.
           </h2>
-          <p className="text-sm sm:text-base text-[#64748B] leading-relaxed">
-            Eatery Cloud supports three device types through its POS environment, each designed for
-            a different part of the restaurant experience.
-          </p>
         </div>
 
-        {/* 3 Device Cards (Point-wise, clean typography, NO images) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-12">
+        {/* 3 Device Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-10">
           {DEVICES.map((device) => (
             <div
               key={device.title}
-              className="flex flex-col justify-between rounded-2xl bg-white border border-[#F0E4D8] p-7 sm:p-8 hover:border-[#FF710D]/50 hover:shadow-lg transition-all duration-300"
+              className="flex flex-col justify-between rounded-2xl bg-white border border-[#F0E4D8] p-6 sm:p-7 hover:border-[#FF710D]/50 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 text-left"
             >
               <div>
-                <div className="flex items-center justify-between gap-3 mb-5">
-                  <div className="w-12 h-12 rounded-xl bg-[#FFF4EA] border border-[#FDE3CF] flex items-center justify-center text-[#FF710D] text-xl shadow-2xs">
+                <div className="flex items-center justify-between gap-3 mb-4">
+                  <div className="w-11 h-11 rounded-xl bg-[#FFF4EA] border border-[#FDE3CF] flex items-center justify-center text-[#FF710D] text-lg shadow-2xs">
                     <i className={`bi ${device.icon}`}></i>
                   </div>
                   <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#FFF4EA] text-[#FF710D] border border-orange-200">
@@ -115,15 +112,15 @@ export function DeviceWorkflowSection() {
                 <h3 className="text-xl font-bold text-[#102B46] tracking-tight">
                   {device.title}
                 </h3>
-                <p className="text-xs font-semibold text-[#64748B] uppercase tracking-wider mt-1 mb-4">
+                <p className="text-xs font-semibold text-[#64748B] uppercase tracking-wider mt-0.5 mb-3">
                   {device.targetRole}
                 </p>
 
-                <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed mb-6 pb-5 border-b border-[#F0E4D8]/80">
+                <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed mb-4 pb-4 border-b border-[#F0E4D8]/80">
                   {device.summary}
                 </p>
 
-                <div className="space-y-3 mb-4">
+                <div className="space-y-2.5 mb-2">
                   <p className="text-[11px] font-bold uppercase tracking-wider text-[#102B46]">
                     Key Device Capabilities:
                   </p>
@@ -143,37 +140,43 @@ export function DeviceWorkflowSection() {
           ))}
         </div>
 
-        {/* Connecting Workflow Banner (Site-matching warm palette, NO images) */}
-        <div className="rounded-2xl bg-white border border-[#FDE3CF] p-6 sm:p-8 lg:p-10 shadow-sm">
-          <div className="max-w-3xl mb-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF4EA] border border-orange-200 text-xs font-bold text-[#FF710D] mb-3">
-              <i className="bi bi-arrow-repeat"></i>
+        {/* Connecting Workflow Banner */}
+        <div className="rounded-2xl bg-white border border-[#FDE3CF] p-6 sm:p-8 shadow-xs text-left">
+          <div className="max-w-2xl mb-6 sm:mb-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FFF4EA] border border-orange-200 text-xs font-bold text-[#FF710D] mb-2.5">
+              <i className="bi bi-arrow-repeat text-xs"></i>
               <span>Unified System Integration</span>
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-[#102B46] tracking-tight mb-2">
-              Connecting Placement, Operations, and Kitchen Coordination
+            <h3 className="text-xl sm:text-2xl font-bold text-[#102B46] tracking-tight mb-1.5">
+              Connecting Placement, Operations &amp; Kitchen Coordination
             </h3>
             <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed">
-              Together, these device types help connect order placement, counter operations, and
-              kitchen coordination within a unified restaurant workflow.
+              Order placement, counter billing, and kitchen fulfillment work in real-time synchronization.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {WORKFLOW_STEPS.map((ws) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
+            {WORKFLOW_STEPS.map((ws, idx) => (
               <div
                 key={ws.step}
-                className="p-4 rounded-xl bg-[#FFFDF9] border border-[#F0E4D8] hover:border-[#FF710D]/50 hover:shadow-2xs transition-all"
+                className="p-4 rounded-xl bg-[#FFFDF9] border border-[#F0E4D8] hover:border-[#FF710D]/50 hover:shadow-2xs transition-all flex flex-col justify-between"
               >
-                <div className="text-xs font-mono font-bold text-[#FF710D] mb-1">
-                  STEP {ws.step}
+                <div>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-xs font-mono font-bold text-[#FF710D]">
+                      STEP {ws.step}
+                    </span>
+                    {idx < WORKFLOW_STEPS.length - 1 && (
+                      <i className="bi bi-arrow-right text-xs text-[#FF710D]/50 hidden lg:inline-block"></i>
+                    )}
+                  </div>
+                  <div className="text-sm font-bold text-[#102B46] mb-1">
+                    {ws.title}
+                  </div>
+                  <p className="text-xs text-[#64748B] leading-relaxed">
+                    {ws.desc}
+                  </p>
                 </div>
-                <div className="text-sm font-bold text-[#102B46] mb-1.5">
-                  {ws.title}
-                </div>
-                <p className="text-xs text-[#64748B] leading-relaxed">
-                  {ws.desc}
-                </p>
               </div>
             ))}
           </div>
