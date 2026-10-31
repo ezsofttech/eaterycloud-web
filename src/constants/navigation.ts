@@ -24,8 +24,4 @@ export const FOOTER_FEATURE_LINKS = [
   { label: "Multi-Location Support", href: "/#products" },
 ];
 
-export const CONTACT_INFO = {
-  phone: "+91 98765 43210",
-  email: "support@eaterycloud.com",
-  location: "India",
-};
+export { CONTACT_INFO } from "./contact";

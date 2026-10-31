@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { CONTACT_INFO } from "@/constants/contact";
 
 type RoleId = "pos" | "franchise" | "admin";
 
@@ -483,7 +484,7 @@ export function LoginPortalView() {
         <div className="shrink-0 pt-2 text-center text-xs text-neutral-500 relative z-10">
           <span>Need a hand? </span>
           <a
-            href="mailto:support@eaterycloud.com"
+            href={`mailto:${CONTACT_INFO.email}`}
             className="font-semibold text-neutral-700 hover:text-[#FF710D] underline decoration-neutral-300 hover:decoration-[#FF710D] inline-flex items-center gap-1 transition-colors"
           >
             <span>Talk to us</span>

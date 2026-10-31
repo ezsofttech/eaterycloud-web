@@ -20,8 +20,8 @@ export function Footer() {
               Smarter Restaurant Management for a Better Tomorrow.
             </p>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300">
-              <span className="w-2 h-2 rounded-full bg-[#FF710D]" />
-              <span>Cloud Restaurant SaaS Platform</span>
+              {/* <span className="w-2 h-2 rounded-full bg-[#FF710D]" /> */}
+              <span>SaaS Platform</span>
             </div>
           </div>
 
@@ -72,7 +72,7 @@ export function Footer() {
               <li className="flex items-center gap-2.5">
                 <i className="bi bi-telephone-fill text-[#FF710D] text-sm shrink-0"></i>
                 <a
-                  href={`tel:${CONTACT_INFO.phone}`}
+                  href={CONTACT_INFO.phoneTel}
                   className="hover:text-white transition-colors"
                 >
                   {CONTACT_INFO.phone}
@@ -87,9 +87,34 @@ export function Footer() {
                   {CONTACT_INFO.email}
                 </a>
               </li>
-              <li className="flex items-center gap-2.5">
-                <i className="bi bi-geo-alt-fill text-[#FF710D] text-sm shrink-0"></i>
-                <span>{CONTACT_INFO.location}</span>
+              <li className="flex items-start gap-2.5">
+                <i className="bi bi-geo-alt-fill text-[#FF710D] text-sm shrink-0 mt-0.5"></i>
+                <span className="leading-snug">
+                  {CONTACT_INFO.address.addressLine1 && (
+                    <span className="block text-gray-300">
+                      {CONTACT_INFO.address.addressLine1}
+                    </span>
+                  )}
+                  {CONTACT_INFO.address.addressLine2 && (
+                    <span className="block text-gray-300">
+                      {CONTACT_INFO.address.addressLine2}
+                    </span>
+                  )}
+                  <span>
+                    {[
+                      CONTACT_INFO.address.city,
+                      CONTACT_INFO.address.state,
+                    ]
+                      .filter(Boolean)
+                      .join(", ")}
+                    {CONTACT_INFO.address.pinCode
+                      ? ` - ${CONTACT_INFO.address.pinCode}`
+                      : ""}
+                    {CONTACT_INFO.address.country
+                      ? `, ${CONTACT_INFO.address.country}`
+                      : ""}
+                  </span>
+                </span>
               </li>
             </ul>
           </div>
@@ -103,42 +128,50 @@ export function Footer() {
               Connect with our hospitality technology community.
             </p>
             <div className="flex items-center gap-3">
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#FF710D] flex items-center justify-center text-white transition-all duration-200"
-                aria-label="Facebook"
-              >
-                <i className="bi bi-facebook text-sm"></i>
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#FF710D] flex items-center justify-center text-white transition-all duration-200"
-                aria-label="Instagram"
-              >
-                <i className="bi bi-instagram text-sm"></i>
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#FF710D] flex items-center justify-center text-white transition-all duration-200"
-                aria-label="LinkedIn"
-              >
-                <i className="bi bi-linkedin text-sm"></i>
-              </a>
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#FF710D] flex items-center justify-center text-white transition-all duration-200"
-                aria-label="YouTube"
-              >
-                <i className="bi bi-youtube text-sm"></i>
-              </a>
+              {CONTACT_INFO.social.facebook && (
+                <a
+                  href={CONTACT_INFO.social.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#FF710D] flex items-center justify-center text-white transition-all duration-200"
+                  aria-label="Facebook"
+                >
+                  <i className="bi bi-facebook text-sm"></i>
+                </a>
+              )}
+              {CONTACT_INFO.social.instagram && (
+                <a
+                  href={CONTACT_INFO.social.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#FF710D] flex items-center justify-center text-white transition-all duration-200"
+                  aria-label="Instagram"
+                >
+                  <i className="bi bi-instagram text-sm"></i>
+                </a>
+              )}
+              {CONTACT_INFO.social.linkedin && (
+                <a
+                  href={CONTACT_INFO.social.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#FF710D] flex items-center justify-center text-white transition-all duration-200"
+                  aria-label="LinkedIn"
+                >
+                  <i className="bi bi-linkedin text-sm"></i>
+                </a>
+              )}
+              {CONTACT_INFO.social.youtube && (
+                <a
+                  href={CONTACT_INFO.social.youtube}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#FF710D] flex items-center justify-center text-white transition-all duration-200"
+                  aria-label="YouTube"
+                >
+                  <i className="bi bi-youtube text-sm"></i>
+                </a>
+              )}
             </div>
           </div>
         </div>
