@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
+import { Avatar } from "@/components/ui/Avatar";
 import { TESTIMONIALS } from "@/constants/testimonials";
 
 export function TestimonialsSection() {
@@ -75,15 +75,12 @@ export function TestimonialsSection() {
           <div className="flex-1 text-center py-4">
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               {/* Circular Avatar */}
-              <div className="relative w-16 h-16 rounded-full overflow-hidden shrink-0 border border-[#F0E4D8]">
-                <Image
-                  src={current.avatarSrc}
-                  alt={current.author}
-                  fill
-                  sizes="64px"
-                  className="object-cover"
-                />
-              </div>
+              <Avatar
+                src={current.avatarSrc}
+                name={current.author}
+                size="xl"
+                className="shadow-xs"
+              />
 
               {/* Quote & Author Details */}
               <div className="text-center sm:text-left max-w-xl">

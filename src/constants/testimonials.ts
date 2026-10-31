@@ -4,7 +4,7 @@ export interface TestimonialItem {
   author: string;
   role: string;
   business: string;
-  avatarSrc: string;
+  avatarSrc?: string;
 }
 
 export const TESTIMONIALS: TestimonialItem[] = [
@@ -12,10 +12,10 @@ export const TESTIMONIALS: TestimonialItem[] = [
     id: "spice-villa",
     quote:
       "Eatery Cloud has completely transformed the way we manage our operations. It's simple, powerful and the support team is amazing!",
-    author: "Rakesh Sharma",
+    author: "Virat Maurya",
     role: "Restaurant Owner",
     business: "Spice Villa",
-    avatarSrc: "/images/06_testimonial_avatar.png",
+    avatarSrc: "/images/virat_maurya-man-6069944.jpg",
   },
   {
     id: "bistro-delight",
@@ -24,7 +24,7 @@ export const TESTIMONIALS: TestimonialItem[] = [
     author: "Ananya Mehta",
     role: "Operations Director",
     business: "Urban Bistro Co.",
-    avatarSrc: "/images/06_testimonial_avatar.png",
+    avatarSrc: "",
   },
   {
     id: "cafe-royale",
