@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
+import { printInvoice } from "@/utils/print";
+import { WhatsAppBillModal } from "./WhatsAppBillModal";
 
 /**
  * =========================================================================
@@ -52,20 +54,41 @@ const INVOICE_FEATURES: InvoiceFeatureItem[] = [
 export function InvoiceFeatureSection() {
   const [invoiceUrl] = useState<string>(INVOICE_IMAGE_URL);
   const [notification, setNotification] = useState<string | null>(null);
+  const [isPrinting, setIsPrinting] = useState<boolean>(false);
+  const [isWhatsAppOpen, setIsWhatsAppOpen] = useState<boolean>(false);
 
   const triggerToast = (msg: string) => {
     setNotification(msg);
     setTimeout(() => {
       setNotification((curr) => (curr === msg ? null : curr));
-    }, 2600);
+    }, 2800);
   };
 
-  const handlePrint = () => {
-    triggerToast("Sent print job to 80mm Thermal Printer (POS-001552)");
+  const handlePrint = async () => {
+    if (isPrinting) return;
+    setIsPrinting(true);
+    triggerToast("Opening ESC/POS print preview for 80mm roll...");
+
+    try {
+      await printInvoice(invoiceUrl, {
+        title: "POS-001552 - Tax Invoice (ESC/POS 80mm)",
+        rollWidth: "80mm",
+      });
+      triggerToast("Sent print job to 80mm Thermal Printer (POS-001552)");
+    } catch (err) {
+      console.error("Print error:", err);
+      triggerToast("Unable to open print preview. Please check printer settings.");
+    } finally {
+      setIsPrinting(false);
+    }
   };
 
   const handleWhatsApp = () => {
-    triggerToast("E-Invoice link dispatched via WhatsApp to customer");
+    setIsWhatsAppOpen(true);
+  };
+
+  const handleWhatsAppSuccess = (phone: string) => {
+    triggerToast(`E-Invoice sample dispatched via WhatsApp to +${phone}`);
   };
 
   return (
@@ -155,10 +178,12 @@ export function InvoiceFeatureSection() {
               <button
                 type="button"
                 onClick={handlePrint}
-                className="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-[#FF710D] hover:bg-[#E65E00] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+                disabled={isPrinting}
+                aria-label="Print sample ESC/POS thermal invoice receipt"
+                className="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-[#FF710D] hover:bg-[#E65E00] disabled:opacity-75 disabled:cursor-not-allowed text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
               >
-                <i className="bi bi-printer text-xs" />
-                <span>Print Sample (ESC/POS)</span>
+                <i className={`bi ${isPrinting ? "bi-arrow-repeat animate-spin" : "bi-printer"} text-xs`} />
+                <span>{isPrinting ? "Preparing..." : "Print Sample (ESC/POS)"}</span>
               </button>
               <button
                 type="button"
@@ -225,6 +250,19 @@ export function InvoiceFeatureSection() {
           </div>
         </div>
       </div>
+
+      {/* WhatsApp Bill Dispatch Modal */}
+      {isWhatsAppOpen && (
+        <WhatsAppBillModal
+          isOpen={isWhatsAppOpen}
+          onClose={() => setIsWhatsAppOpen(false)}
+          onSuccess={handleWhatsAppSuccess}
+          invoiceNumber="INV-002208"
+          orderCode="POS-001552"
+          totalAmount="Rs. 1,248.00"
+          invoiceImageUrl={invoiceUrl}
+        />
+      )}
     </section>
   );
 }
