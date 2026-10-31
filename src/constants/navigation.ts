@@ -21,12 +21,12 @@ export const NAV_ITEMS: NavItem[] = [
     children: [
       {
         label: "POS & Billing",
-        href: "/#pos-billing",
+        href: "/pos-billing",
         icon: "bi-receipt-cutoff",
       },
       {
         label: "Inventory",
-        href: "/#inventory",
+        href: "/inventory",
         icon: "bi-box-seam",
       },
     ],
@@ -42,8 +42,8 @@ export const FOOTER_QUICK_LINKS = [
 ];
 
 export const FOOTER_FEATURE_LINKS = [
-  { label: "POS & Billing", href: "/#pos-billing" },
-  { label: "Inventory", href: "/#inventory" },
+  { label: "POS & Billing", href: "/pos-billing" },
+  { label: "Inventory", href: "/inventory" },
   { label: "Order Management", href: "/#products" },
   { label: "Reports & Analytics", href: "/#products" },
   { label: "Multi-Location Support", href: "/#products" },

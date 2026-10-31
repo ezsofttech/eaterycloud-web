@@ -124,6 +124,14 @@ export function Navbar() {
     if (item.href === "/contact") {
       return pathname === "/contact" || pathname.startsWith("/contact");
     }
+    if (
+      pathname === "/inventory" ||
+      pathname.startsWith("/inventory") ||
+      pathname === "/pos-billing" ||
+      pathname.startsWith("/pos-billing")
+    ) {
+      return item.label === "Products";
+    }
     if (pathname === "/") {
       if (item.href === "/" && (activeSection === "home" || !activeSection)) {
         return true;
@@ -144,14 +152,26 @@ export function Navbar() {
   };
 
   const isSubItemActive = (subHref: string) => {
+    if (
+      subHref === "/pos-billing" &&
+      (pathname === "/pos-billing" || pathname.startsWith("/pos-billing"))
+    ) {
+      return true;
+    }
+    if (subHref === "/inventory" && (pathname === "/inventory" || pathname.startsWith("/inventory"))) {
+      return true;
+    }
     if (pathname === "/") {
       if (
-        subHref === "/#pos-billing" &&
+        (subHref === "/#pos-billing" || subHref === "/pos-billing") &&
         (activeSection === "pos-billing" || activeSection === "invoicing")
       ) {
         return true;
       }
-      if (subHref === "/#inventory" && activeSection === "inventory") {
+      if (
+        (subHref === "/#inventory" || subHref === "/inventory") &&
+        activeSection === "inventory"
+      ) {
         return true;
       }
     }

@@ -62,9 +62,17 @@ export function FeaturesSection() {
               {KEY_FEATURES.map((feature) => (
                 <div
                   key={feature.id}
-                  id={feature.id === "inventory-ctrl" ? "inventory" : undefined}
+                  id={
+                    feature.id === "inventory-ctrl"
+                      ? "inventory"
+                      : feature.id === "order-mgmt"
+                      ? "pos-billing"
+                      : undefined
+                  }
                   className={`flex flex-col items-start ${
-                    feature.id === "inventory-ctrl" ? "scroll-mt-32" : ""
+                    feature.id === "inventory-ctrl" || feature.id === "order-mgmt"
+                      ? "scroll-mt-32"
+                      : ""
                   }`}
                 >
                   {/* Circular Orange Icon Container */}
@@ -81,6 +89,26 @@ export function FeaturesSection() {
                   <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed">
                     {feature.description}
                   </p>
+
+                  {feature.id === "order-mgmt" && (
+                    <Link
+                      href="/pos-billing"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#FF710D] hover:text-[#E65E00] mt-2 group/link"
+                    >
+                      <span>Explore POS & Billing</span>
+                      <i className="bi bi-arrow-right text-[10px] transition-transform group-hover/link:translate-x-1" />
+                    </Link>
+                  )}
+
+                  {feature.id === "inventory-ctrl" && (
+                    <Link
+                      href="/inventory"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#FF710D] hover:text-[#E65E00] mt-2 group/link"
+                    >
+                      <span>Explore Inventory Page</span>
+                      <i className="bi bi-arrow-right text-[10px] transition-transform group-hover/link:translate-x-1" />
+                    </Link>
+                  )}
                 </div>
               ))}
             </div>

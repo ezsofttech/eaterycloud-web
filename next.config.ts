@@ -6,12 +6,17 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/products/pos-billing",
-        destination: "/#pos-billing",
+        destination: "/pos-billing",
+        permanent: false,
+      },
+      {
+        source: "/pos",
+        destination: "/pos-billing",
         permanent: false,
       },
       {
         source: "/products/inventory",
-        destination: "/#inventory",
+        destination: "/inventory",
         permanent: false,
       },
     ];
