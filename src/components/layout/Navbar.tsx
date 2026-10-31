@@ -66,6 +66,9 @@ export function Navbar() {
     if (href === "/about-us") {
       return pathname === "/about-us" || pathname.startsWith("/about-us");
     }
+    if (href === "/contact") {
+      return pathname === "/contact" || pathname.startsWith("/contact");
+    }
     if (pathname === "/") {
       if (href === "/" && (activeSection === "home" || !activeSection)) {
         return true;

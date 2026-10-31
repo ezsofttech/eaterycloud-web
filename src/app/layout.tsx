@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Eatery Cloud — Restaurant Management SaaS Platform",
+  title: "Eatery Cloud — The Complete Restaurant Operating System for Growing Food Businesses",
   description:
     "Powerful, easy-to-use software to manage your orders, kitchen, inventory, staff and more — all in one place.",
   icons: {

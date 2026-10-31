@@ -9,7 +9,7 @@ import { TestimonialsSection } from "@/features/home/components/TestimonialsSect
 import { Footer } from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: "Eatery Cloud — Restaurant Management SaaS Platform",
+  title: "Eatery Cloud — The Complete Restaurant Operating System for Growing Food Businesses",
   description:
     "Powerful, easy-to-use software to manage your orders, kitchen, inventory, staff and multi-location franchises — all in one place.",
 };

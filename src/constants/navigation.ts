@@ -7,14 +7,14 @@ export const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about-us" },
   { label: "Products", href: "/#products" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const FOOTER_QUICK_LINKS = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about-us" },
   { label: "Products", href: "/#products" },
-  { label: "Contact", href: "/#contact" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const FOOTER_FEATURE_LINKS = [
