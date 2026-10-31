@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { printInvoice } from "@/utils/print";
-import { WhatsAppBillModal } from "./WhatsAppBillModal";
 
 /**
  * =========================================================================
@@ -55,7 +54,6 @@ export function InvoiceFeatureSection() {
   const [invoiceUrl] = useState<string>(INVOICE_IMAGE_URL);
   const [notification, setNotification] = useState<string | null>(null);
   const [isPrinting, setIsPrinting] = useState<boolean>(false);
-  const [isWhatsAppOpen, setIsWhatsAppOpen] = useState<boolean>(false);
 
   const triggerToast = (msg: string) => {
     setNotification(msg);
@@ -81,14 +79,6 @@ export function InvoiceFeatureSection() {
     } finally {
       setIsPrinting(false);
     }
-  };
-
-  const handleWhatsApp = () => {
-    setIsWhatsAppOpen(true);
-  };
-
-  const handleWhatsAppSuccess = (phone: string) => {
-    triggerToast(`E-Invoice sample dispatched via WhatsApp to +${phone}`);
   };
 
   return (
@@ -174,24 +164,16 @@ export function InvoiceFeatureSection() {
             </div>
 
             {/* Direct Action Buttons */}
-            <div className="grid grid-cols-2 gap-2.5 pt-1">
+            <div className="pt-1">
               <button
                 type="button"
                 onClick={handlePrint}
                 disabled={isPrinting}
                 aria-label="Print sample ESC/POS thermal invoice receipt"
-                className="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-[#FF710D] hover:bg-[#E65E00] disabled:opacity-75 disabled:cursor-not-allowed text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-[#FF710D] hover:bg-[#E65E00] disabled:opacity-75 disabled:cursor-not-allowed text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
               >
                 <i className={`bi ${isPrinting ? "bi-arrow-repeat animate-spin" : "bi-printer"} text-xs`} />
                 <span>{isPrinting ? "Preparing..." : "Print Sample (ESC/POS)"}</span>
-              </button>
-              <button
-                type="button"
-                onClick={handleWhatsApp}
-                className="flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-bold transition-all cursor-pointer"
-              >
-                <i className="bi bi-whatsapp text-xs" />
-                <span>WhatsApp Bill</span>
               </button>
             </div>
           </div>
@@ -250,19 +232,6 @@ export function InvoiceFeatureSection() {
           </div>
         </div>
       </div>
-
-      {/* WhatsApp Bill Dispatch Modal */}
-      {isWhatsAppOpen && (
-        <WhatsAppBillModal
-          isOpen={isWhatsAppOpen}
-          onClose={() => setIsWhatsAppOpen(false)}
-          onSuccess={handleWhatsAppSuccess}
-          invoiceNumber="INV-002208"
-          orderCode="POS-001552"
-          totalAmount="Rs. 1,248.00"
-          invoiceImageUrl={invoiceUrl}
-        />
-      )}
     </section>
   );
 }
